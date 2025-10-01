@@ -1,7 +1,5 @@
 "use client"
-
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,6 +7,13 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Menu, X, ArrowRight, Star, Users, Award, Zap } from "lucide-react"
 import TestimonialsSection from "@/components/testimonials-section"
+import smoData from "@/data/smo.json"
+import ppcData from "@/data/ppc.json"
+import seoData from "@/data/seo.json"
+import lmsData from "@/data/lms.json"
+import wdsData from "@/data/wds.json"
+import brandsData from "@/data/brands.json"
+import resultsData from "@/data/results.json"
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,6 +29,12 @@ export default function HomePage() {
     email: "",
     phone: "",
     company: "",
+    message: "",
+  })
+  const [contactFormData, setContactFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
     message: "",
   })
 
@@ -70,36 +81,60 @@ export default function HomePage() {
     setIsModalOpen(true)
   }
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleServiceFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!selectedPlan) return
 
-    // Create inquiry object
     const inquiry = {
-      id: Date.now().toString(),
       ...formData,
       plan: selectedPlan,
-      status: "new",
       submittedAt: new Date().toISOString(),
+      status: "new",
     }
 
-    // Save to localStorage
-    const existingInquiries = JSON.parse(localStorage.getItem("contactInquiries") || "[]")
-    existingInquiries.push(inquiry)
-    localStorage.setItem("contactInquiries", JSON.stringify(existingInquiries))
+    await fetch("/api/service-enquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inquiry),
+    })
 
-    // Reset form and close modal
     setFormData({ name: "", email: "", phone: "", company: "", message: "" })
     setIsModalOpen(false)
     setSelectedPlan(null)
 
-    // Show success message
     alert("Thank you for your inquiry! We'll get back to you soon.")
+  }
+
+  const handleContactFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const inquiry = {
+      ...contactFormData,
+      submittedAt: new Date().toISOString(),
+      status: "new",
+    }
+
+    await fetch("/api/enquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(inquiry),
+    })
+
+    setContactFormData({ name: "", email: "", phone: "", message: "" })
+
+    alert("Thank you for your message! We'll get back to you soon.")
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const handleContactInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setContactFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
@@ -142,7 +177,7 @@ export default function HomePage() {
               </div>
 
               {/* Contact Form */}
-              <form onSubmit={handleFormSubmit} className="space-y-6">
+              <form onSubmit={handleServiceFormSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">Full Name *</label>
@@ -335,7 +370,6 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section
         id="home"
         className="pt-16 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-50 relative overflow-hidden"
@@ -425,7 +459,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section id="services" className="py-20 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10" />
@@ -440,80 +473,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* SMO Services */}
           <div className="mb-20">
             <h3 className="text-2xl font-bold text-center mb-12 text-blue-300 animate-fade-in-up">
               Social Media Optimization (SMO)
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Basic Plan",
-                  price: "$350",
-                  hours: "50",
-                  features: [
-                    "10 Monthly postings",
-                    "10 Analytics tracking",
-                    "Competitor analysis",
-                    "Strategy formation & Hashtag promotion",
-                    "Monthly creative creation",
-                    "Account Management",
-                    "Engagement with communities & groups",
-                    "Network build-up",
-                    "Content optimization",
-                    "Paid Promotion (Budget estimate, Campaign setup, Ad creative)",
-                    "Remarketing (Audience lists, Ad creatives, Optimization)",
-                    "Customer support (Phone, Email)",
-                    "Additional: YouTube promotion, WhatsApp marketing, LinkedIn promotion",
-                  ],
-                  color: "from-blue-500 to-cyan-500",
-                  popular: false,
-                },
-                {
-                  name: "Bronze Plan",
-                  price: "$550",
-                  hours: "70",
-                  features: [
-                    "15 Monthly postings",
-                    "15 Analytics tracking",
-                    "Competitor analysis",
-                    "Strategy formation & Hashtag promotion",
-                    "Monthly creative creation",
-                    "Account Management",
-                    "Engagement with communities & groups",
-                    "Network build-up",
-                    "Content optimization",
-                    "Paid Promotion (same features)",
-                    "Remarketing (same features)",
-                    "Customer support (Phone, Email)",
-                    "Additional: Google My Business optimization, Blog posting",
-                  ],
-                  color: "from-amber-500 to-orange-500",
-                  popular: true,
-                },
-                {
-                  name: "Platinum Plan",
-                  price: "$800",
-                  hours: "130",
-                  features: [
-                    "20 Monthly postings",
-                    "20 Analytics tracking",
-                    "Competitor analysis",
-                    "Strategy formation & Hashtag promotion",
-                    "Monthly creative creation",
-                    "Account Management",
-                    "Engagement with communities & groups",
-                    "Network build-up",
-                    "Content optimization",
-                    "Paid Promotion (same features)",
-                    "Remarketing (same features)",
-                    "Customer support (Phone, Email)",
-                    "Additional: Influencer collaboration, Paid Ads on YouTube, Lead generation campaigns",
-                  ],
-                  color: "from-purple-500 to-indigo-500",
-                  popular: false,
-                },
-              ].map((plan, index) => (
+              {smoData.map((plan, index) => (
                 <Card
                   key={index}
                   className={`bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group relative ${
@@ -563,77 +528,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* PPC Services */}
           <div className="mb-20">
             <h3 className="text-2xl font-bold text-center mb-12 text-cyan-300 animate-fade-in-up">
               Pay-Per-Click (PPC) Advertising
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Basic Plan",
-                  price: "$350",
-                  setupFee: "Setup Fee Included",
-                  features: [
-                    "Free Trial: 15 Days",
-                    "Advertising Budget: $0 – $2,999 / Month",
-                    "Full Optimizations: 1.5 Month",
-                    "Ad Groups: Up to 7",
-                    "Ads per Ad Group: 4",
-                    "Keywords: Up to 75",
-                    "Negative Keywords",
-                    "Conversion Tracking + Funnel Reporting",
-                    "Monthly Reporting + Custom Dashboard",
-                    "No Contracts",
-                    "Ad Networks: Google, Bing",
-                    "Mobile Ads + Responsive Ads",
-                    "Additional: A/B testing, CRM Integration, Advanced Targeting",
-                  ],
-                  color: "from-green-500 to-emerald-500",
-                },
-                {
-                  name: "Gold Plan",
-                  price: "$550",
-                  setupFee: "Setup Fee Included",
-                  features: [
-                    "Free Trial: 15 Days",
-                    "Advertising Budget: $3,000 – $5,000 / Month",
-                    "Full Optimizations: 2.5 Month",
-                    "Ad Groups: Up to 15",
-                    "Ads per Ad Group: 5",
-                    "Keywords: Up to 150",
-                    "Negative Keywords",
-                    "Conversion Tracking + Funnel Reporting",
-                    "Monthly Reporting + Custom Dashboard",
-                    "No Contracts",
-                    "Ad Networks: Google, Bing, Yahoo, FB",
-                    "Mobile Ads + Responsive Ads",
-                    "Additional: A/B testing, Lead Generation Tracking, Advanced Targeting",
-                  ],
-                  color: "from-yellow-500 to-amber-500",
-                },
-                {
-                  name: "Platinum Plan",
-                  price: "$800",
-                  setupFee: "Setup Fee Included",
-                  features: [
-                    "Free Trial: 15 Days",
-                    "Advertising Budget: $5,000 – $7,000 / Month",
-                    "Full Optimizations: 3.5 Month",
-                    "Ad Groups: Up to 25",
-                    "Ads per Ad Group: 6",
-                    "Keywords: Up to 300",
-                    "Negative Keywords",
-                    "Conversion Tracking + Funnel Reporting",
-                    "Monthly Reporting + ROI Dashboard",
-                    "No Contracts",
-                    "Ad Networks: Google, Bing, Yahoo, FB, LinkedIn",
-                    "Display / Image Ads + Video Ads + A/B Testing",
-                    "Additional: CRM Integration, Advanced Targeting, Multi-channel Retargeting",
-                  ],
-                  color: "from-purple-500 to-pink-500",
-                },
-              ].map((plan, index) => (
+              {ppcData.map((plan, index) => (
                 <Card
                   key={index}
                   className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group hover:border-cyan-500/50"
@@ -674,74 +574,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* SEO Services */}
           <div className="mb-20">
             <h3 className="text-2xl font-bold text-center mb-12 text-green-300 animate-fade-in-up">
               Search Engine Optimization (SEO)
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  name: "Basic",
-                  price: "$799",
-                  features: [
-                    "Working Hours: 60/month",
-                    "Keywords: 50",
-                    "Backlinks: 50/month",
-                    "Landing Pages Optimization: 6",
-                    "Technical SEO Enhancements",
-                    "Website SEO Audit & Fixes + Advanced AI Audit",
-                    "Pre-Optimization Analysis + Extended competitor mapping",
-                    "Competitor Analysis & Strategy + Predictive Gap Analysis",
-                  ],
-                  color: "from-blue-500 to-indigo-500",
-                },
-                {
-                  name: "Bronze",
-                  price: "$1299",
-                  features: [
-                    "Enhanced Basic features",
-                    "More keywords & backlinks",
-                    "Advanced content optimization",
-                    "Local SEO enhancements",
-                    "Social media integration",
-                    "Monthly reporting",
-                    "Priority support",
-                    "Extended analysis",
-                  ],
-                  color: "from-amber-600 to-orange-600",
-                },
-                {
-                  name: "Gold",
-                  price: "$1699",
-                  features: [
-                    "All Bronze features",
-                    "Advanced AI optimization",
-                    "Multi-channel integration",
-                    "Custom dashboard",
-                    "Predictive analytics",
-                    "Voice search optimization",
-                    "Advanced reporting",
-                    "Dedicated account manager",
-                  ],
-                  color: "from-yellow-500 to-amber-500",
-                },
-                {
-                  name: "Platinum",
-                  price: "$2499",
-                  features: [
-                    "All Gold features",
-                    "Enterprise-level optimization",
-                    "AI-powered insights",
-                    "Custom integrations",
-                    "Advanced automation",
-                    "ROI tracking",
-                    "White-label reporting",
-                    "24/7 priority support",
-                  ],
-                  color: "from-purple-500 to-indigo-600",
-                },
-              ].map((plan, index) => (
+              {seoData.map((plan, index) => (
                 <Card
                   key={index}
                   className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group hover:border-green-500/50"
@@ -778,59 +616,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* LinkedIn Services */}
           <div className="mb-20">
             <h3 className="text-2xl font-bold text-center mb-12 text-indigo-300 animate-fade-in-up">
               LinkedIn Marketing Services
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Bronze Plan",
-                  price: "$350",
-                  features: [
-                    "Target audience list: 1500+",
-                    "Organic posts: 5 (Personal & Business)",
-                    "LinkedIn invites & InMail: Enhanced",
-                    "3 level follow-up",
-                    "CSV file for connections (expanded)",
-                    "Smart auto-cut if client responds",
-                    "Track followers, engagement, leads + advanced insights",
-                    "Additional: Sales Navigator integration, LinkedIn Ads support",
-                  ],
-                  color: "from-blue-600 to-indigo-600",
-                },
-                {
-                  name: "Gold Plan",
-                  price: "$550",
-                  features: [
-                    "Target audience list: 2000+",
-                    "Organic posts: 8 (Personal & Business)",
-                    "LinkedIn invites & InMail: 900",
-                    "3 level follow-up",
-                    "CSV file for connections (expanded)",
-                    "Smart auto-cut if client responds",
-                    "Track followers, engagement, leads + ROI reporting",
-                    "Additional: CRM integration, Influencer outreach",
-                  ],
-                  color: "from-yellow-500 to-orange-500",
-                },
-                {
-                  name: "Platinum Plan",
-                  price: "$800",
-                  features: [
-                    "Target audience list: 2500+",
-                    "Organic posts: 12 (Personal & Business)",
-                    "LinkedIn invites & InMail: 1500",
-                    "3 level follow-up",
-                    "CSV file for connections (expanded)",
-                    "Smart auto-cut if client responds",
-                    "Track followers, engagement, leads + advanced ROI reporting",
-                    "Additional: LinkedIn Ads management, Profile optimization, Advanced targeting",
-                  ],
-                  color: "from-purple-500 to-pink-500",
-                },
-              ].map((plan, index) => (
+              {lmsData.map((plan, index) => (
                 <Card
                   key={index}
                   className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group hover:border-indigo-500/50"
@@ -867,71 +658,12 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Web Development Services */}
           <div>
             <h3 className="text-2xl font-bold text-center mb-12 text-rose-300 animate-fade-in-up">
               Web Development Services
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Silver Plan",
-                  price: "$400",
-                  features: [
-                    "Partially Custom Design – only 1 iteration",
-                    "Responsive Site (Desktop, Tablet, Mobile)",
-                    "WordPress / Joomla! / C5 / Drupal",
-                    "Back-End User Management",
-                    "GUI Admin Panel",
-                    "Search Engine Friendly Structure",
-                    "Conversion Forms – up to 3",
-                    "Content Migration",
-                    "Web Hosting",
-                    "Hosted Emails – 25",
-                    "Web maintenance work – 5 hours/month",
-                  ],
-                  color: "from-slate-500 to-gray-600",
-                },
-                {
-                  name: "Gold Plan",
-                  price: "$800",
-                  features: [
-                    "Custom Design – up to 2 iterations",
-                    "Responsive Site (Desktop, Tablet, Mobile)",
-                    "WordPress / Joomla! / C5 / Drupal / Magento / Shopify",
-                    "Custom Blog",
-                    "CMS Updates – up to 6 months",
-                    "Social Logins",
-                    "Shopping Cart",
-                    "Newsletter Module",
-                    "Conversion Forms – up to 7",
-                    "Products Migration – up to 500",
-                    "Hosted Emails – 50",
-                    "Web maintenance work – 10 hours/month",
-                  ],
-                  color: "from-yellow-500 to-amber-500",
-                },
-                {
-                  name: "Premium Plan",
-                  price: "$1800",
-                  features: [
-                    "Custom Design – up to 4 iterations",
-                    "New Logo Design",
-                    "HTML Email Templates",
-                    "Custom Framework / WordPress / Magento / Shopify",
-                    "Custom Blog",
-                    "CMS Updates – up to 12 months",
-                    "Shopping Cart",
-                    "Dealer/Affiliate Section",
-                    "Google eCommerce Tracking",
-                    "Conversion Forms – up to 12",
-                    "Products Migration – up to 2000",
-                    "Hosted Emails – 200",
-                    "Web maintenance work – 25 hours/month",
-                  ],
-                  color: "from-purple-500 to-indigo-600",
-                },
-              ].map((plan, index) => (
+              {wdsData.map((plan, index) => (
                 <Card
                   key={index}
                   className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group hover:border-rose-500/50"
@@ -1062,20 +794,7 @@ export default function HomePage() {
 
           <div className="mb-20">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-              {[
-                { name: "Google", color: "from-red-500 to-yellow-500" },
-                { name: "Microsoft", color: "from-blue-500 to-cyan-500" },
-                { name: "Apple", color: "from-gray-600 to-gray-800" },
-                { name: "Amazon", color: "from-orange-500 to-yellow-500" },
-                { name: "Meta", color: "from-blue-600 to-indigo-600" },
-                { name: "Netflix", color: "from-red-600 to-red-800" },
-                { name: "Spotify", color: "from-green-500 to-green-600" },
-                { name: "Uber", color: "from-gray-800 to-black" },
-                { name: "Airbnb", color: "from-pink-500 to-red-500" },
-                { name: "Tesla", color: "from-red-600 to-red-700" },
-                { name: "Adobe", color: "from-red-500 to-pink-500" },
-                { name: "Slack", color: "from-purple-500 to-indigo-500" },
-              ].map((client, index) => (
+              {brandsData.map((client, index) => (
                 <div key={index} className="group animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
                   <div className="relative h-20 bg-white rounded-xl shadow-lg border border-gray-100 flex items-center justify-center transform hover:scale-110 hover:shadow-2xl transition-all duration-500 group-hover:border-blue-200 overflow-hidden">
                     {/* Gradient overlay on hover */}
@@ -1098,122 +817,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 text-foreground animate-fade-in-up">
-              What our clients say about us
-            </h3>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Sarah Johnson",
-                  role: "CEO, TechStart",
-                  company: "Google",
-                  content:
-                    "Prits transformed our digital presence completely. Their innovative approach and attention to detail resulted in a 300% increase in user engagement. The team's expertise in both design and development is unmatched.",
-                  rating: 5,
-                  avatar: "SJ",
-                  color: "from-blue-500 to-cyan-500",
-                },
-                {
-                  name: "Michael Chen",
-                  role: "Product Manager, InnovateCorp",
-                  company: "Microsoft",
-                  content:
-                    "Working with Prits was a game-changer for our product launch. They delivered a stunning platform that not only looks amazing but performs flawlessly. Our conversion rates improved by 250%.",
-                  rating: 5,
-                  avatar: "MC",
-                  color: "from-green-500 to-emerald-500",
-                },
-                {
-                  name: "Emily Rodriguez",
-                  role: "Marketing Director, GrowthCo",
-                  company: "Amazon",
-                  content:
-                    "The Prits team exceeded every expectation. Their strategic approach to our digital marketing campaigns resulted in unprecedented growth. They're true partners in our success story.",
-                  rating: 5,
-                  avatar: "ER",
-                  color: "from-purple-500 to-indigo-500",
-                },
-                {
-                  name: "David Kim",
-                  role: "Founder, StartupX",
-                  company: "Meta",
-                  content:
-                    "Prits didn't just build us a website; they crafted a digital experience that perfectly represents our brand. The ROI has been incredible, and our customers love the new platform.",
-                  rating: 5,
-                  avatar: "DK",
-                  color: "from-orange-500 to-red-500",
-                },
-                {
-                  name: "Lisa Thompson",
-                  role: "VP of Digital, RetailCorp",
-                  company: "Tesla",
-                  content:
-                    "The level of professionalism and creativity from Prits is outstanding. They transformed our e-commerce platform, resulting in a 400% increase in online sales within the first quarter.",
-                  rating: 5,
-                  avatar: "LT",
-                  color: "from-pink-500 to-rose-500",
-                },
-                {
-                  name: "James Wilson",
-                  role: "CTO, FinanceFlow",
-                  company: "Apple",
-                  content:
-                    "Prits delivered a complex financial platform that handles millions of transactions seamlessly. Their technical expertise and innovative solutions have been instrumental to our growth.",
-                  rating: 5,
-                  avatar: "JW",
-                  color: "from-cyan-500 to-blue-500",
-                },
-              ].map((testimonial, index) => (
-                <Card
-                  key={index}
-                  className="p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in-up bg-white/80 backdrop-blur-sm border-gray-200 hover:border-blue-300 group relative overflow-hidden"
-                  style={{ animationDelay: `${index * 150}ms` }}
-                >
-                  {/* Gradient background on hover */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${testimonial.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                  />
-
-                  <CardContent className="p-0 space-y-6 relative z-10">
-                    {/* Rating stars */}
-                    <div className="flex space-x-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 fill-yellow-400 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300"
-                          style={{ transitionDelay: `${i * 50}ms` }}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Testimonial content */}
-                    <p className="text-muted-foreground italic text-pretty leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                      "{testimonial.content}"
-                    </p>
-
-                    {/* Client info */}
-                    <div className="flex items-center space-x-4">
-                      <div
-                        className={`w-12 h-12 bg-gradient-to-r ${testimonial.color} rounded-full flex items-center justify-center text-white font-bold transform group-hover:scale-110 transition-transform duration-300`}
-                      >
-                        {testimonial.avatar}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-foreground group-hover:text-blue-600 transition-colors duration-300">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                        <div className="text-xs text-blue-600 font-medium">{testimonial.company}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-gray-200 animate-fade-in-up">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-foreground mb-4">Our Impact in Numbers</h3>
@@ -1221,12 +824,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { number: "500+", label: "Projects Delivered", icon: "🚀", color: "from-blue-500 to-cyan-500" },
-                { number: "98%", label: "Client Satisfaction", icon: "⭐", color: "from-green-500 to-emerald-500" },
-                { number: "250%", label: "Average ROI Increase", icon: "📈", color: "from-purple-500 to-indigo-500" },
-                { number: "24/7", label: "Support Available", icon: "🛟", color: "from-orange-500 to-red-500" },
-              ].map((metric, index) => (
+              {resultsData.map((metric, index) => (
                 <div
                   key={index}
                   className="text-center group animate-fade-in-up"
@@ -1330,11 +928,14 @@ export default function HomePage() {
               style={{ animationDelay: "300ms" }}
             >
               <CardContent className="p-0">
-                <form className="space-y-6">
+                <form onSubmit={handleContactFormSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">Name</label>
                       <Input
+                        name="name"
+                        value={contactFormData.name}
+                        onChange={handleContactInputChange}
                         placeholder="John Doe"
                         className="transform focus:scale-105 focus:border-blue-400 transition-all duration-300"
                       />
@@ -1342,7 +943,10 @@ export default function HomePage() {
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">Email</label>
                       <Input
+                        name="email"
                         type="email"
+                        value={contactFormData.email}
+                        onChange={handleContactInputChange}
                         placeholder="john@example.com"
                         className="transform focus:scale-105 focus:border-blue-400 transition-all duration-300"
                       />
@@ -1351,6 +955,9 @@ export default function HomePage() {
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">Phone</label>
                     <Input
+                      name="phone"
+                      value={contactFormData.phone}
+                      onChange={handleContactInputChange}
                       placeholder="+1 (555) 000-0000"
                       className="transform focus:scale-105 focus:border-blue-400 transition-all duration-300"
                     />
@@ -1358,6 +965,9 @@ export default function HomePage() {
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">Message</label>
                     <Textarea
+                      name="message"
+                      value={contactFormData.message}
+                      onChange={handleContactInputChange}
                       placeholder="Tell us about your project..."
                       className="min-h-[120px] transform focus:scale-105 focus:border-blue-400 transition-all duration-300"
                     />

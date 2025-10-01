@@ -1,59 +1,25 @@
-"use client"
-
-import { useState, useEffect } from "react"
+"use client";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
 
-interface Testimonial {
-  id: string
-  name: string
-  role: string
-  company: string
-  content: string
-  avatar: string
-}
+type Testimonial = {
+  _id: string;
+  name: string;
+  role: string;
+  company: string;
+  content: string;
+  avatar?: string;
+};
 
 export default function TestimonialsSection() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("testimonials")
-    if (stored) {
-      setTestimonials(JSON.parse(stored))
-    } else {
-      // Default testimonials if none exist
-      const defaultTestimonials: Testimonial[] = [
-        {
-          id: "1",
-          name: "Sarah Johnson",
-          role: "Marketing Director",
-          company: "TechCorp Inc.",
-          content:
-            "Prits transformed our digital presence completely. Their innovative approach and attention to detail exceeded our expectations.",
-          avatar: "/professional-woman-diverse.png",
-        },
-        {
-          id: "2",
-          name: "Michael Chen",
-          role: "CEO",
-          company: "StartupXYZ",
-          content:
-            "Working with Prits was a game-changer for our startup. They delivered exceptional results within our tight timeline.",
-          avatar: "/professional-man.jpg",
-        },
-        {
-          id: "3",
-          name: "Emily Rodriguez",
-          role: "Product Manager",
-          company: "InnovateLab",
-          content:
-            "The team at Prits brought our vision to life with creativity and technical excellence. Highly recommended!",
-          avatar: "/professional-woman-diverse.png",
-        },
-      ]
-      setTestimonials(defaultTestimonials)
-    }
-  }, [])
+    fetch("/api/testimonials")
+      .then((res) => res.json())
+      .then(setTestimonials);
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
@@ -68,7 +34,7 @@ export default function TestimonialsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {testimonials.map((testimonial) => (
             <Card
-              key={testimonial.id}
+              key={testimonial._id}
               className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
               <CardContent className="p-8">

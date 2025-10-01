@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Basic Plan",
+    "price": "$350",
+    "setupFee": "Setup Fee Included",
+    "features": [
+      "Free Trial: 15 Days",
+      "Advertising Budget: $0 – $2,999 / Month",
+      "Full Optimizations: 1.5 Month",
+      "Ad Groups: Up to 7",
+      "Ads per Ad Group: 4",
+      "Keywords: Up to 75",
+      "Negative Keywords",
+      "Conversion Tracking + Funnel Reporting",
+      "Monthly Reporting + Custom Dashboard",
+      "No Contracts",
+      "Ad Networks: Google, Bing",
+      "Mobile Ads + Responsive Ads",
+      "Additional: A/B testing, CRM Integration, Advanced Targeting"
+    ],
+    "color": "from-green-500 to-emerald-500"
+  },
+  {
+    "name": "Gold Plan",
+    "price": "$550",
+    "setupFee": "Setup Fee Included",
+    "features": [
+      "Free Trial: 15 Days",
+      "Advertising Budget: $3,000 – $5,000 / Month",
+      "Full Optimizations: 2.5 Month",
+      "Ad Groups: Up to 15",
+      "Ads per Ad Group: 5",
+      "Keywords: Up to 150",
+      "Negative Keywords",
+      "Conversion Tracking + Funnel Reporting",
+      "Monthly Reporting + Custom Dashboard",
+      "No Contracts",
+      "Ad Networks: Google, Bing, Yahoo, FB",
+      "Mobile Ads + Responsive Ads",
+      "Additional: A/B testing, Lead Generation Tracking, Advanced Targeting"
+    ],
+    "color": "from-yellow-500 to-amber-500"
+  },
+  {
+    "name": "Platinum Plan",
+    "price": "$800",
+    "setupFee": "Setup Fee Included",
+    "features": [
+      "Free Trial: 15 Days",
+      "Advertising Budget: $5,000 – $7,000 / Month",
+      "Full Optimizations: 3.5 Month",
+      "Ad Groups: Up to 25",
+      "Ads per Ad Group: 6",
+      "Keywords: Up to 300",
+      "Negative Keywords",
+      "Conversion Tracking + Funnel Reporting",
+      "Monthly Reporting + ROI Dashboard",
+      "No Contracts",
+      "Ad Networks: Google, Bing, Yahoo, FB, LinkedIn",
+      "Display / Image Ads + Video Ads + A/B Testing",
+      "Additional: CRM Integration, Advanced Targeting, Multi-channel Retargeting"
+    ],
+    "color": "from-purple-500 to-pink-500"
+  }
+]

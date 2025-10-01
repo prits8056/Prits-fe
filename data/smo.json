@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Basic Plan",
+    "price": "$350",
+    "hours": "50",
+    "features": [
+      "10 Monthly postings",
+      "10 Analytics tracking",
+      "Competitor analysis",
+      "Strategy formation & Hashtag promotion",
+      "Monthly creative creation",
+      "Account Management",
+      "Engagement with communities & groups",
+      "Network build-up",
+      "Content optimization",
+      "Paid Promotion (Budget estimate, Campaign setup, Ad creative)",
+      "Remarketing (Audience lists, Ad creatives, Optimization)",
+      "Customer support (Phone, Email)",
+      "Additional: YouTube promotion, WhatsApp marketing, LinkedIn promotion"
+    ],
+    "color": "from-blue-500 to-cyan-500",
+    "popular": false
+  },
+  {
+    "name": "Bronze Plan",
+    "price": "$550",
+    "hours": "70",
+    "features": [
+      "15 Monthly postings",
+      "15 Analytics tracking",
+      "Competitor analysis",
+      "Strategy formation & Hashtag promotion",
+      "Monthly creative creation",
+      "Account Management",
+      "Engagement with communities & groups",
+      "Network build-up",
+      "Content optimization",
+      "Paid Promotion (same features)",
+      "Remarketing (same features)",
+      "Customer support (Phone, Email)",
+      "Additional: Google My Business optimization, Blog posting"
+    ],
+    "color": "from-amber-500 to-orange-500",
+    "popular": true
+  },
+  {
+    "name": "Platinum Plan",
+    "price": "$800",
+    "hours": "130",
+    "features": [
+      "20 Monthly postings",
+      "20 Analytics tracking",
+      "Competitor analysis",
+      "Strategy formation & Hashtag promotion",
+      "Monthly creative creation",
+      "Account Management",
+      "Engagement with communities & groups",
+      "Network build-up",
+      "Content optimization",
+      "Paid Promotion (same features)",
+      "Remarketing (same features)",
+      "Customer support (Phone, Email)",
+      "Additional: Influencer collaboration, Paid Ads on YouTube, Lead generation campaigns"
+    ],
+    "color": "from-purple-500 to-indigo-500",
+    "popular": false
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Silver Plan",
+    "price": "$400",
+    "features": [
+      "Partially Custom Design – only 1 iteration",
+      "Responsive Site (Desktop, Tablet, Mobile)",
+      "WordPress / Joomla! / C5 / Drupal",
+      "Back-End User Management",
+      "GUI Admin Panel",
+      "Search Engine Friendly Structure",
+      "Conversion Forms – up to 3",
+      "Content Migration",
+      "Web Hosting",
+      "Hosted Emails – 25",
+      "Web maintenance work – 5 hours/month"
+    ],
+    "color": "from-slate-500 to-gray-600"
+  },
+  {
+    "name": "Gold Plan",
+    "price": "$800",
+    "features": [
+      "Custom Design – up to 2 iterations",
+      "Responsive Site (Desktop, Tablet, Mobile)",
+      "WordPress / Joomla! / C5 / Drupal / Magento / Shopify",
+      "Custom Blog",
+      "CMS Updates – up to 6 months",
+      "Social Logins",
+      "Shopping Cart",
+      "Newsletter Module",
+      "Conversion Forms – up to 7",
+      "Products Migration – up to 500",
+      "Hosted Emails – 50",
+      "Web maintenance work – 10 hours/month"
+    ],
+    "color": "from-yellow-500 to-amber-500"
+  },
+  {
+    "name": "Premium Plan",
+    "price": "$1800",
+    "features": [
+      "Custom Design – up to 4 iterations",
+      "New Logo Design",
+      "HTML Email Templates",
+      "Custom Framework / WordPress / Magento / Shopify",
+      "Custom Blog",
+      "CMS Updates – up to 12 months",
+      "Shopping Cart",
+      "Dealer/Affiliate Section",
+      "Google eCommerce Tracking",
+      "Conversion Forms – up to 12",
+      "Products Migration – up to 2000",
+      "Hosted Emails – 200",
+      "Web maintenance work – 25 hours/month"
+    ],
+    "color": "from-purple-500 to-indigo-600"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Sarah Johnson",
+    "role": "Marketing Director",
+    "company": "TechCorp Inc.",
+    "content": "Prits transformed our digital presence completely. Their innovative approach and attention to detail exceeded our expectations.",
+    "avatar": "/professional-woman-diverse.png"
+  },
+  {
+    "id": "2",
+    "name": "Michael Chen",
+    "role": "CEO",
+    "company": "StartupXYZ",
+    "content": "Working with Prits was a game-changer for our startup. They delivered exceptional results within our tight timeline.",
+    "avatar": "/professional-man.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Emily Rodriguez",
+    "role": "Product Manager",
+    "company": "InnovateLab",
+    "content": "The team at Prits brought our vision to life with creativity and technical excellence. Highly recommended!",
+    "avatar": "/professional-woman-diverse.png"
+  }
+]

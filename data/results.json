@@ -1,0 +1,26 @@
+[
+  {
+    "number": "500+",
+    "label": "Projects Delivered",
+    "icon": "🚀",
+    "color": "from-blue-500 to-cyan-500"
+  },
+  {
+    "number": "98%",
+    "label": "Client Satisfaction",
+    "icon": "⭐",
+    "color": "from-green-500 to-emerald-500"
+  },
+  {
+    "number": "250%",
+    "label": "Average ROI Increase",
+    "icon": "📈",
+    "color": "from-purple-500 to-indigo-500"
+  },
+  {
+    "number": "24/7",
+    "label": "Support Available",
+    "icon": "🛟",
+    "color": "from-orange-500 to-red-500"
+  }
+]

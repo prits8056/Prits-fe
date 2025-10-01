@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Basic",
+    "price": "$799",
+    "features": [
+      "Working Hours: 60/month",
+      "Keywords: 50",
+      "Backlinks: 50/month",
+      "Landing Pages Optimization: 6",
+      "Technical SEO Enhancements",
+      "Website SEO Audit & Fixes + Advanced AI Audit",
+      "Pre-Optimization Analysis + Extended competitor mapping",
+      "Competitor Analysis & Strategy + Predictive Gap Analysis"
+    ],
+    "color": "from-blue-500 to-indigo-500"
+  },
+  {
+    "name": "Bronze",
+    "price": "$1299",
+    "features": [
+      "Enhanced Basic features",
+      "More keywords & backlinks",
+      "Advanced content optimization",
+      "Local SEO enhancements",
+      "Social media integration",
+      "Monthly reporting",
+      "Priority support",
+      "Extended analysis"
+    ],
+    "color": "from-amber-600 to-orange-600"
+  },
+  {
+    "name": "Gold",
+    "price": "$1699",
+    "features": [
+      "All Bronze features",
+      "Advanced AI optimization",
+      "Multi-channel integration",
+      "Custom dashboard",
+      "Predictive analytics",
+      "Voice search optimization",
+      "Advanced reporting",
+      "Dedicated account manager"
+    ],
+    "color": "from-yellow-500 to-amber-500"
+  },
+  {
+    "name": "Platinum",
+    "price": "$2499",
+    "features": [
+      "All Gold features",
+      "Enterprise-level optimization",
+      "AI-powered insights",
+      "Custom integrations",
+      "Advanced automation",
+      "ROI tracking",
+      "White-label reporting",
+      "24/7 priority support"
+    ],
+    "color": "from-purple-500 to-indigo-600"
+  }
+]

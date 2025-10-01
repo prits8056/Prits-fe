@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Bronze Plan",
+    "price": "$350",
+    "features": [
+      "Target audience list: 1500+",
+      "Organic posts: 5 (Personal & Business)",
+      "LinkedIn invites & InMail: Enhanced",
+      "3 level follow-up",
+      "CSV file for connections (expanded)",
+      "Smart auto-cut if client responds",
+      "Track followers, engagement, leads + advanced insights",
+      "Additional: Sales Navigator integration, LinkedIn Ads support"
+    ],
+    "color": "from-blue-600 to-indigo-600"
+  },
+  {
+    "name": "Gold Plan",
+    "price": "$550",
+    "features": [
+      "Target audience list: 2000+",
+      "Organic posts: 8 (Personal & Business)",
+      "LinkedIn invites & InMail: 900",
+      "3 level follow-up",
+      "CSV file for connections (expanded)",
+      "Smart auto-cut if client responds",
+      "Track followers, engagement, leads + ROI reporting",
+      "Additional: CRM integration, Influencer outreach"
+    ],
+    "color": "from-yellow-500 to-orange-500"
+  },
+  {
+    "name": "Platinum Plan",
+    "price": "$800",
+    "features": [
+      "Target audience list: 2500+",
+      "Organic posts: 12 (Personal & Business)",
+      "LinkedIn invites & InMail: 1500",
+      "3 level follow-up",
+      "CSV file for connections (expanded)",
+      "Smart auto-cut if client responds",
+      "Track followers, engagement, leads + advanced ROI reporting",
+      "Additional: LinkedIn Ads management, Profile optimization, Advanced targeting"
+    ],
+    "color": "from-purple-500 to-pink-500"
+  }
+]
