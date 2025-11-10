@@ -504,15 +504,15 @@ export default function HomePage() {
                     </div>
 
                     <div className="space-y-3">
-                      {plan.features.slice(0, 8).map((feature, featureIndex) => (
+                      {plan.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
                           <span className="text-slate-300 text-sm">{feature}</span>
                         </div>
                       ))}
-                      <div className="pt-2 border-t border-slate-700">
+                      {/* <div className="pt-2 border-t border-slate-700">
                         <p className="text-blue-400 text-sm font-medium">Plus additional features...</p>
-                      </div>
+                      </div> */}
                     </div>
 
                     <Button
@@ -550,15 +550,15 @@ export default function HomePage() {
                     </div>
 
                     <div className="space-y-3">
-                      {plan.features.slice(0, 8).map((feature, featureIndex) => (
+                      {plan.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-2 flex-shrink-0" />
                           <span className="text-slate-300 text-sm">{feature}</span>
                         </div>
                       ))}
-                      <div className="pt-2 border-t border-slate-700">
+                      {/* <div className="pt-2 border-t border-slate-700">
                         <p className="text-cyan-400 text-sm font-medium">Plus additional features...</p>
-                      </div>
+                      </div> */}
                     </div>
 
                     <Button
@@ -679,15 +679,15 @@ export default function HomePage() {
                     </div>
 
                     <div className="space-y-3">
-                      {plan.features.slice(0, 8).map((feature, featureIndex) => (
+                      {plan.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-2 flex-shrink-0" />
                           <span className="text-slate-300 text-sm">{feature}</span>
                         </div>
                       ))}
-                      <div className="pt-2 border-t border-slate-700">
+                      {/* <div className="pt-2 border-t border-slate-700">
                         <p className="text-rose-400 text-sm font-medium">Plus additional features...</p>
-                      </div>
+                      </div> */}
                     </div>
 
                     <Button
