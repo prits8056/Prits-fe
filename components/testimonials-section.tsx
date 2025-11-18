@@ -22,7 +22,7 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+    <section id="testimonials" className="py-20 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>

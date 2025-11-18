@@ -14,6 +14,8 @@ import lmsData from "@/data/lms.json"
 import wdsData from "@/data/wds.json"
 import brandsData from "@/data/brands.json"
 import resultsData from "@/data/results.json"
+import gmbData from "@/data/gmb.json"
+import pmpData from "@/data/pmp.json"
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -315,11 +317,20 @@ export default function HomePage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border transition-all duration-300 animate-slide-down-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2 animate-fade-in">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center transform hover:scale-110 hover:rotate-12 transition-all duration-300">
-                <span className="text-white font-bold text-sm">P</span>
+            {/* Brand */}
+            <div className="flex items-center gap-2 animate-fade-in min-w-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center transform hover:scale-110 hover:rotate-12 transition-all duration-300 shrink-0">
+                <span className="text-white font-bold text-xs sm:text-sm">P</span>
               </div>
-              <span className="text-xl font-bold text-foreground">Prits</span>
+
+              <div className="flex flex-col items-start justify-center leading-tight min-w-0">
+                <span className="text-lg sm:text-xl font-bold text-foreground">
+                  Prits
+                </span>
+                <span className="text-[0.65rem] sm:text-xs text-muted-foreground break-words max-w-[180px] sm:max-w-none">
+                  Powered by Career Edge Educational Services
+                </span>
+              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -328,9 +339,8 @@ export default function HomePage() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-blue-600 hover:scale-105 relative group ${
-                    activeSection === item.id ? "text-blue-600" : "text-muted-foreground"
-                  }`}
+                  className={`text-sm font-medium transition-all duration-300 hover:text-blue-600 hover:scale-105 relative group ${activeSection === item.id ? "text-blue-600" : "text-muted-foreground"
+                    }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {item.label}
@@ -357,9 +367,8 @@ export default function HomePage() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left py-2 text-sm font-medium transition-all duration-300 hover:text-blue-600 hover:translate-x-2 ${
-                    activeSection === item.id ? "text-blue-600" : "text-muted-foreground"
-                  }`}
+                  className={`block w-full text-left py-2 text-sm font-medium transition-all duration-300 hover:text-blue-600 hover:translate-x-2 ${activeSection === item.id ? "text-blue-600" : "text-muted-foreground"
+                    }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {item.label}
@@ -369,6 +378,7 @@ export default function HomePage() {
           )}
         </div>
       </nav>
+
 
       <section
         id="home"
@@ -481,9 +491,8 @@ export default function HomePage() {
               {smoData.map((plan, index) => (
                 <Card
                   key={index}
-                  className={`bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group relative ${
-                    plan.popular ? "border-blue-500/50 ring-2 ring-blue-500/20" : "hover:border-blue-500/50"
-                  }`}
+                  className={`bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group relative ${plan.popular ? "border-blue-500/50 ring-2 ring-blue-500/20" : "hover:border-blue-500/50"
+                    }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {plan.popular && (
@@ -658,7 +667,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div>
+          <div className="mb-20" >
             <h3 className="text-2xl font-bold text-center mb-12 text-rose-300 animate-fade-in-up">
               Web Development Services
             </h3>
@@ -685,9 +694,6 @@ export default function HomePage() {
                           <span className="text-slate-300 text-sm">{feature}</span>
                         </div>
                       ))}
-                      {/* <div className="pt-2 border-t border-slate-700">
-                        <p className="text-rose-400 text-sm font-medium">Plus additional features...</p>
-                      </div> */}
                     </div>
 
                     <Button
@@ -702,10 +708,95 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+
+
+          <div className="mb-20">
+            <h3 className="text-2xl font-bold text-center mb-12 text-purple-600 animate-fade-in-up">
+              Google My Business Services
+            </h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {gmbData.map((plan, index) => (
+                <Card
+                  key={index}
+                  className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl animate-fade-in-up group hover:border-rose-500/50"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-0 space-y-6">
+                    <div className="text-center">
+                      <h4 className="text-xl font-bold text-white mb-2">{plan.name}</h4>
+                      <div className="flex items-baseline justify-center mb-4">
+                        <span className="text-3xl font-bold text-white">{plan.price}</span>
+                        <span className="text-slate-400 ml-1">/month</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start space-x-2">
+                          <div className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-slate-300 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Button
+                      onClick={() => handlePlanSelection(plan.name, plan.price, "Google My Business")}
+                      className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-white transform hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl`}
+                    >
+                      Choose Plan
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+
+          <div className="mb-20">
+            <h3 className="text-2xl font-bold text-center mb-12 text-amber-800 animate-fade-in-up">
+              Performance Marketing Services
+            </h3>
+            <div className="grid md:grid-cols-4 gap-8">
+              {pmpData.map((plan, index) => (
+                <Card
+                  key={index}
+                  className="bg-slate-800/50 backdrop-blur-sm border-slate-700 p-6 hover:bg-slate-750 transition-all duration-500 transform hover:scale-102 hover:shadow-2xl animate-fade-in-up group hover:border-rose-500/50"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-0 space-y-6">
+                    <div className="text-center">
+                      <h4 className="text-xl font-bold text-white mb-2">{plan.name}</h4>
+                      <div className="flex items-baseline justify-center mb-4">
+                        <span className="text-3xl font-bold text-white">{plan.price}</span>
+                        <span className="text-slate-400 ml-1">/month</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start space-x-2">
+                          <div className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-slate-300 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Button
+                      onClick={() => handlePlanSelection(plan.name, plan.price, "Performance Marketing")}
+                      className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-white transform hover:scale-105 transition-all duration-300 shadow-lg group-hover:shadow-xl`}
+                    >
+                      Choose Plan
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
-
-      {/* Featured Case Study */}
 
       {/* About Us Section */}
       <section id="about" className="py-20 bg-slate-50 relative overflow-hidden">
@@ -1006,6 +1097,9 @@ export default function HomePage() {
                 Creating exceptional digital experiences that inspire, engage, and drive success for businesses
                 worldwide.
               </p>
+              <p className="text-slate-400 text-sm">
+                📍2706 SE Loop 820 Fort Worth, TX 76140, United States
+              </p>
             </div>
 
             {[
@@ -1035,7 +1129,7 @@ export default function HomePage() {
             className="border-t border-slate-800 mt-12 pt-8 text-center animate-fade-in-up"
             style={{ animationDelay: "500ms" }}
           >
-            <p className="text-slate-400 text-sm">© 2025 Prits. All rights reserved. Crafted with ❤️</p>
+            <p className="text-slate-400 text-sm">© 2025 Prits, Powered by Career Edge Educational Services. All rights reserved. Crafted with ❤️</p>
           </div>
         </div>
       </footer>
